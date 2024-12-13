@@ -18,7 +18,21 @@ class DBClient {
     const dbURL = `mongodb://${host}:${port}/${database}`;
 
     this.client = new mongodb.MongoClient(dbURL, { useUnifiedTopology: true });
-    this.client.connect();
+    this.client.connect(); // add ; when not testing .then
+    /** 
+      .then(() => {
+        console.log('Connected to MongoDB');
+        
+        // Ping the MongoDB server
+        return this.client.db().command({ ping: 1 });
+      })
+      .then(pingResult => {
+        console.log('Ping response:', pingResult);
+      })
+      .catch((error) => {
+        console.error('Error connecting to MongoDB:', error);
+      });
+    */
   }
 
   /**
@@ -26,7 +40,8 @@ class DBClient {
    * @returns {boolean}
    */
   isAlive() {
-    return this.client.isConnected();
+    return this.client.isConnected(); // for older version of mongo
+    //return this.client.db().admin().ping  // for new version
   }
 
   /**
