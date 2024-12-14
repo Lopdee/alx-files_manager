@@ -6,6 +6,7 @@ import express from 'express';
  */
 const injectMiddlewares = (api) => {
   api.use(express.json({ limit: '200mb' }));
+  api.use(express.urlencoded({ extended: true }));
 };
 
 export default injectMiddlewares;

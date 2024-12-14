@@ -1,9 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import { Express } from 'express';
-import AppController from '../alx_readdyassit/alx-files_manager/controllers/AppController';
-import AuthController from '../alx_readdyassit/alx-files_manager/controllers/AuthController';
-import UsersController from '../alx_readdyassit/alx-files_manager/controllers/UsersController';
-import FilesController from '../alx_readdyassit/alx-files_manager/controllers/FilesController';
+import AppController from '../controllers/AppController';
+import AuthController from '../controllers/AuthController';
+import UsersController from '../controllers/UsersController';
+import FilesController from '../controllers/FilesController';
 import { basicAuthenticate, xTokenAuthenticate } from '../middlewares/auth';
 import { APIError, errorResponse } from '../middlewares/error';
 

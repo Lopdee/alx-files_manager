@@ -1,19 +1,17 @@
 /* eslint-disable no-unused-vars */
-import { Request, Response, NextFunction } from 'express';
 
 /**
  * Represents an error in this API.
  */
 export class APIError extends Error {
   constructor(code, message) {
-    super();
+    super(message);
     this.code = code || 500;
-    this.message = message;
   }
 }
 
 /**
- * Applies Basic authentication to a route.
+ * Handles errors and sends appropriate responses.
  * @param {Error} err The error object.
  * @param {Request} req The Express request object.
  * @param {Response} res The Express response object.
@@ -23,10 +21,10 @@ export const errorResponse = (err, req, res, next) => {
   const defaultMsg = `Failed to process ${req.url}`;
 
   if (err instanceof APIError) {
-    res.status(err.code).json({ error: err.message || defaultMsg });
-    return;
+    return res.status(err.code).json({ error: err.message || defaultMsg });
   }
+
   res.status(500).json({
-    error: err ? err.message || err.toString() : defaultMsg,
+    error: err?.message || err?.toString() || defaultMsg,
   });
 };
